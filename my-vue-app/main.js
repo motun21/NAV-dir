@@ -1,6 +1,7 @@
 import './style.css'
-
 import * as THREE from 'three';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
+
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -25,6 +26,8 @@ const angel = new THREE.Mesh( geometry, material ); // combines those two things
 
 scene.add(angel)
 
+const controls = new OrbitControls(camera, renderer.domElement); //adds the orbit controls I really dont know how this works but yolo
+
 const geo = new THREE.PlaneGeometry(25,25);
 const floor = new THREE.Mesh( geo, material );
 
@@ -39,6 +42,7 @@ function animate(){
   angel.rotation.x += 0.01;
   angel.rotation.z += 0.005;
 
+  controls.update();
   //controls.update(); 
   renderer.render(scene , camera);
 }
