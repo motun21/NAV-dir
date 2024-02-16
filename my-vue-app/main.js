@@ -11,7 +11,7 @@ const renderer = new THREE.WebGL1Renderer({
 
 renderer.setPixelRatio( window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight); //sets size of the rendering window
-camera.position.setZ(40);
+camera.position.set(0,200, 400); //sets position of the camera to a nice space
 const controls = new OrbitControls(camera, renderer.domElement); //adds the orbit controls I really dont know how this works but yolo
 
 renderer.render(scene , camera); //This draws the scene
@@ -23,20 +23,44 @@ const angel = new THREE.Mesh( geometry, material ); // combines those two things
 
 
 
-const geo = new THREE.PlaneGeometry(50,25);
+const geo = new THREE.PlaneGeometry(500,250);
 const floor = new THREE.Mesh( geo, material );
 //floor that the builldings are going to be placed on
-floor.position.setY(0);
-floor.rotation.x = 99
+floor.rotation.x = Math.PI / 2; //3JS uses stupid as radians for some reason
 
-const gridHelper = new THREE.GridHelper(200, 50);
-const hlp = new THREE.AxesHelper(100);
+//Tall Building Function
+function tall_builds(xpos = 0 , zpos = 0, ypos = 20){
+  const geom = new THREE.BoxGeometry( 10, 40, 10 );
+  const mat = new THREE.MeshBasicMaterial( { color: 0xFF6347, wireframe: true } );
+  const tall_build = new THREE.Mesh( geom, mat );
+  tall_build.position.set(xpos, ypos, zpos);
+  scene.add(tall_build);
+}
 
-scene.add( floor ,gridHelper, hlp)
+//Small Building Function
+function small_buildings(xpos = 0 , zpos = 0, ypos = 10){
+  const geom = new THREE.BoxGeometry( 10, 20, 10 );
+  const mat = new THREE.MeshBasicMaterial( { color: 0xFF6347, wireframe: true } );
+  const small_buildings = new THREE.Mesh( geom, mat );
+  small_buildings.position.set(xpos, ypos, zpos);
+  scene.add(small_buildings);
+}
+
+tall_builds(-150,100);
+tall_builds(-170,80);
+tall_builds(-140,80);
+small_buildings(-150,30);
+
+const gridHelper = new THREE.GridHelper(250, 250);
+const hlp = new THREE.AxesHelper(100); //orange is x axis, green is y, and blue is z
+
+
+
+
+
+scene.add( floor , hlp)
 function animate(){
   requestAnimationFrame(animate);
-  angel.rotation.x += 0.01;
-  angel.rotation.z += 0.005;
 
   controls.update();
   renderer.render(scene , camera);
