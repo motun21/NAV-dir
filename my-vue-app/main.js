@@ -17,7 +17,7 @@ const controls = new OrbitControls(camera, renderer.domElement); //adds the orbi
 renderer.render(scene , camera); //This draws the scene
 
 const geometry = new THREE.TorusKnotGeometry( 10, 3, 100, 16 );  //defines the geometry of the thingy
-const material = new THREE.MeshBasicMaterial( { color: 0xFF6347, wireframe: true } ); //defines the materail of the thingy
+const material = new THREE.MeshBasicMaterial( { color: 0xB2BEB5, wireframe: false } ); //defines the materail of the thingy
 const angel = new THREE.Mesh( geometry, material ); // combines those two things to make a real thing
 
 
@@ -26,10 +26,10 @@ const angel = new THREE.Mesh( geometry, material ); // combines those two things
 const geo = new THREE.PlaneGeometry(500,250);
 const floor = new THREE.Mesh( geo, material );
 //floor that the builldings are going to be placed on
-floor.rotation.x = Math.PI / 2; //3JS uses stupid as radians for some reason
+floor.rotation.x = 4.71; //3JS uses stupid as radians for some reason
 
 //Tall Building Function
-function tall_builds(xpos = 0 , zpos = 0, ypos = 20){
+function tall_builds(xpos = 0 , zpos = 0, ypos = 21){
   const geom = new THREE.BoxGeometry( 10, 40, 10 );
   const mat = new THREE.MeshBasicMaterial( { color: 0xFF6347, wireframe: true } );
   const tall_build = new THREE.Mesh( geom, mat );
@@ -38,7 +38,7 @@ function tall_builds(xpos = 0 , zpos = 0, ypos = 20){
 }
 
 //Small Building Function
-function small_buildings(xpos = 0 , zpos = 0, ypos = 10){
+function small_buildings(xpos = 0 , zpos = 0, ypos = 11){
   const geom = new THREE.BoxGeometry( 10, 20, 10 );
   const mat = new THREE.MeshBasicMaterial( { color: 0xFF6347, wireframe: true } );
   const small_buildings = new THREE.Mesh( geom, mat );
@@ -46,10 +46,30 @@ function small_buildings(xpos = 0 , zpos = 0, ypos = 10){
   scene.add(small_buildings);
 }
 
+//Reed Stadium
+function area_builds(xpos = 0 , zpos = 0, ypos = 1 ){
+  const geom = new THREE.DodecahedronGeometry(40 ,0);
+  const mat = new THREE.MeshBasicMaterial( { color: 0xFF6347, wireframe: true } );
+  const area_buildings = new THREE.Mesh( geom, mat );
+  area_buildings.position.set(xpos, ypos, zpos);
+  scene.add(area_buildings);
+}
+
+///area 1
 tall_builds(-150,100);
 tall_builds(-170,80);
 tall_builds(-140,80);
-small_buildings(-150,30);
+small_buildings(-150,60);
+
+//read area 1
+area_builds(60, -60);
+
+//area 3
+small_buildings(150,65)
+small_buildings(170,50)
+small_buildings(155,50)
+tall_builds(170 ,65 )
+small_buildings(180,30)
 
 const gridHelper = new THREE.GridHelper(250, 250);
 const hlp = new THREE.AxesHelper(100); //orange is x axis, green is y, and blue is z
