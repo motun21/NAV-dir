@@ -1,7 +1,7 @@
 import './style.css'
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
-
+import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -20,13 +20,26 @@ const geometry = new THREE.TorusKnotGeometry( 10, 3, 100, 16 );  //defines the g
 const material = new THREE.MeshBasicMaterial( { color: 0xB2BEB5, wireframe: false } ); //defines the materail of the thingy
 const angel = new THREE.Mesh( geometry, material ); // combines those two things to make a real thing
 
-
-
-
 const geo = new THREE.PlaneGeometry(500,250);
 const floor = new THREE.Mesh( geo, material );
 //floor that the builldings are going to be placed on
 floor.rotation.x = 4.71; //3JS uses stupid as radians for some reason
+
+// Text Loading
+const loader = new FontLoader();
+loader.load('./fonts/Work_Sans_Medium_Regular.json' , function (font: THREE.Font){
+  const gem = new THREE.TextGeometry('This is not Rad', {
+    font: font,
+    size: 6,
+    height: 2,
+  })
+  const textMesh = new THREE.Mesh(gem, [
+    new THREE.MeshBasicMaterial({ color: 0x89CFEF }), //front
+    new THREE,THREE.MeshBasicMaterial({color: 0x57A0D2}) //side
+  ])
+  textMesh.position.set(170,20,50);
+});
+
 
 //Tall Building Function
 function tall_builds(xpos = 0 , zpos = 0, ypos = 21){
