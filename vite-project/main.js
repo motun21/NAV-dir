@@ -3,8 +3,8 @@ import * as THREE from 'three';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 import {TextGeometry} from 'three/addons/geometries/TextGeometry.js';
-import { CSS3DRenderer } from 'three/addons/renderers/CSS3DRenderer.js';
-
+// import { CSS3DRenderer } from 'three/addons/renderers/CSS3DRenderer.js';
+// import {CSS2DRenderer} from 'three/addons/renderers/CSS2DRenderer.js';
 
 
 //scene
@@ -58,6 +58,10 @@ material.transparent = true;
 var mesh = new THREE.Mesh(new THREE.PlaneGeometry(100,100), material);
 scene.add(mesh);
 
+//text geometry
+// const goodWord = THREE.TextGeometry(
+// )
+
 //background
 
 const wallpaperLoader = new THREE.TextureLoader();
@@ -67,19 +71,19 @@ scene.background = '0xffffff';
 
 //arrow
 
-//words
-// const loader = new FontLoader();
-// loader.load('src\fonts\Hazard_Signs_Regular.json', function (font){
-//   const geo = new THREE.TxtGeometry('THIS WORKS', {
-//     font: font,
-//     size: 7,
-//     height: 2
-//   });
-//   const textMesh = new THREE.Mesh(geo, [
-//     new THREE.MeshBasicMaterial(0xffffff)
-//   ]);
-//   scene.add(textMesh);
-// });
+// words
+const loader = new FontLoader();
+loader.load('/examples/fonts/droid/droid_sans_bold_typeface.json', function (font){
+  const geo = new THREE.TextGeometry('THIS WORKS', {
+    font: font,
+    size: 80,
+    height: 2
+  });
+  // const textMesh = new THREE.Mesh(geo, [
+  //   new THREE.MeshBasicMaterial(0x000000)
+  // ]);
+  scene.add(geo);
+});
 
 // const fontLoader = new FontLoader();
 // fontLoader.load("node_modules/three/exapmles/fonts/droid/droid_seriff_regular.typeface.json",
