@@ -3,9 +3,11 @@
   top: 0;
   left: 0;
 } */
-
+html {
+  scroll-behavior: smooth;
+}
 body {
-  background-color: rgb(44, 39, 39);
+  background-color: black;
 }
 
 /* h1 {
@@ -62,9 +64,10 @@ body {
 .container{
   position: relative;
   width: auto;
+  background-color: black;
   color: white;
-  /* border: 20px solid white;
-  border-color: white; */
+  margin: 0;
+  padding: 0;
   text-align: center;
 
 }
@@ -80,16 +83,25 @@ body {
   top: 10%;
   left: 50%;
   transform: translate(-50%, -50%);
+  font-size: 1vw;
 }
 
 .container .header h1{
   position: absolute;
-  font-size: xx-large;
-  top: 5%;
-  left: 50%;
+  top: 0%;
+  left: 5%;
   transform: translate(-50%, -50%);
   font-family: mom;
+  font-size: 4vw;
 
+}
+
+.container .header img{
+  position: absolute;
+  width: 10%;
+  height: 10%;
+  top: 0%;
+  left: 4%;
 }
 
 a{
