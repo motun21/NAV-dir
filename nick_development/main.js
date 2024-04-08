@@ -70,7 +70,7 @@ loader.load('src/fonts/Work_Sans_Medium_Regular.json', function (font){
 });
 
 
-
+//Does this push to mohnish development work?
 // loader.load('src/fonts/Work_Sans_Medium_Regular.json' , function (font){
 //   const gem = new TextGeometry('This is not Rad', {
 //     font: font,
