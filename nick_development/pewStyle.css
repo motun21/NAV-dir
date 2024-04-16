@@ -29,6 +29,7 @@
 .containerPew{
     position: relative;
     background-color: black;
+    height: 152px;
 }
 
 #bg{
