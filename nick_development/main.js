@@ -102,6 +102,11 @@ loader.load('src/fonts/Work_Sans_Medium_Regular.json', function (font){
 //   }
 // );
 
+//arrows
+//first create the cylinder
+const cyl = new THREE.Mesh((new THREE.CylinderGeometry(10, 11, 50, 64)), new THREE.MeshBasicMaterial({color: 0xffff00}));
+cyl.position.set(-75, 25, 0);
+scene.add(cyl);
 
 function animate() {
   renderer.render(scene, camera);
