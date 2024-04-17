@@ -104,9 +104,22 @@ loader.load('src/fonts/Work_Sans_Medium_Regular.json', function (font){
 
 //arrows
 //first create the cylinder
-const cyl = new THREE.Mesh((new THREE.CylinderGeometry(10, 11, 50, 64)), new THREE.MeshBasicMaterial({color: 0xffff00}));
-cyl.position.set(-75, 25, 0);
+let radius = 1;
+let height = 15;
+let rseg = 64;
+const cyl = new THREE.Mesh((new THREE.CylinderGeometry(radius, radius, height, rseg)), new THREE.MeshBasicMaterial({color: 0xfff00}));
+
+let arrowlocationx = 0;
+let arrowlocationz = 0;
+cyl.position.set(arrowlocationx, height/2, arrowlocationz);
+
+//next create the cone at the top of the cylinder
+let coneheight = height/5;
+const cone = new THREE.Mesh((new THREE.ConeGeometry(radius, coneheight, rseg)), (new THREE.MeshBasicMaterial({color: 0xffff00})));
+cone.position.set(arrowlocationx, height + coneheight/2, arrowlocationz);
+//add the two pieces
 scene.add(cyl);
+scene.add(cone);
 
 function animate() {
   renderer.render(scene, camera);
