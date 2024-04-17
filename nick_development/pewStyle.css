@@ -1,8 +1,8 @@
 .containerPew .header img{
     position: absolute;
-    width: 6vw;
+    width: 5vw;
     top: 10%;
-    left: 9%;
+    left: 8%;
     object-fit: contain;
 }
 
@@ -13,7 +13,7 @@
     left: 5%;
     font-family: mom;
     font-size: 100%;
-    font-size: 4vw;
+    font-size: 3vw;
   
   
   }
@@ -29,9 +29,10 @@
 .containerPew{
     position: relative;
     background-color: black;
-    height: 152px;
+    height: 125px;
 }
 
-#bg{
-    /* position: relative; */
+canvas {
+  position:fixed;
+  top: 125px;
 }

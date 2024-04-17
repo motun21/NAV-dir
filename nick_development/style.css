@@ -1,25 +1,17 @@
-/* canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-} */
-/* html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-} */
+
 *{
   padding: 0;
   margin: 0;
   font-family: mom;
 }
 
-*{
+/* *{
 -webkit-box-sizing:border-box;
 -moz-box-sizing:border-box;
 -o-box-sizing:border-box;
 -ms-box-sizing:border-box;
 box-sizing:border-box;
-}
+} */
 
 body {
   position: relative;
@@ -72,7 +64,6 @@ body {
 .container{
   position: relative;
   background-color: black !important;
-  /* border: 10px solid blue; */
   height: 1024px;
   background: linear-gradient(rgba(0,0,0,.8), rgba(0,0,0,.6)),  url(imgs\image.png);
   background-size: cover;
