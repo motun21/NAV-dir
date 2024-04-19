@@ -2,17 +2,12 @@ import './style.css'
 import * as THREE from 'three';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
+import {FlyControls} from 'three/examples/jsm/controls/FlyControls.js';
 import {TextGeometry} from 'three/addons/geometries/TextGeometry.js';
 
 //scene
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x000000);
-
-//camera
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth/ window.innerHeight, .1, 1000);
-camera.position.z = 45;
-camera.position.y = 20;
-camera.position.x = 3;
 
 //renderers
 const renderer = new THREE.WebGL1Renderer({
@@ -21,11 +16,6 @@ const renderer = new THREE.WebGL1Renderer({
 });
 renderer.getPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-
-//orbital controls
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.target = new THREE.Vector3(0, 0 , -40);
-controls.update();
 
 //plane
 const plane = new THREE.Mesh(new THREE.PlaneGeometry(200,200), new THREE.MeshPhongMaterial({ color: 0x07d15, side: THREE.DoubleSide}));
@@ -123,8 +113,15 @@ export function small_buildings(xpos = 0 , zpos = 0, ypos = 11){
   scene.add(small_buildings);
 }
 
-//Reed Stadium
+//Reed arena
 export function area_builds(xpos = 0 , zpos = 0, ypos = 1 ){
+  const geom = new THREE.DodecahedronGeometry(40 ,0);
+  const mat = new THREE.MeshBasicMaterial( { color: 0xFF6347, wireframe: true } );
+  const area_buildings = new THREE.Mesh( geom, mat );
+  area_buildings.position.set(xpos, ypos, zpos);
+  scene.add(area_buildings);
+}
+function test_circ(xpos = 0 , zpos = 0, ypos = 20 ){
   const geom = new THREE.DodecahedronGeometry(40 ,0);
   const mat = new THREE.MeshBasicMaterial( { color: 0xFF6347, wireframe: true } );
   const area_buildings = new THREE.Mesh( geom, mat );
@@ -170,17 +167,74 @@ small_buildings(180,30)
 build_words(160,55,"area2")
 
 //keybaord listener and hopefully arrow stuff
-document.addEventListener("keydown", onDocumentKeyDown, false);
+const KEYUP               = 38;        // up key
+const KEYDOWN             = 40;        // down key
+const KEYLEFT             = 37;        // left key
+const KEYRIGHT            = 39;        // right key
 
+var useCustomControls = true;
+document.addEventListener("keydown", function(event){
+  var moveSpeed = 10
+  switch(event.keyCode) {
+    case 67: //C key
+      useCustomControls = !useCustomControls; // Toggle between custom and OrbitControls
+  }
+})
+document.addEventListener("keydown", function(event){
+  var moveSpeed = 10
+  if (useCustomControls){
+    switch(event.keyCode){
+      // case 30: //up key
+      //       camera.position.z -= moveSpeed;
+      //       break;
+      //   case 40: // down key
+      //       camera.position.z += moveSpeed;
+      //       break;
+      //   case 37: // left key
+      //       camera.position.x -= moveSpeed;
+      //       break;
+      //   case 39: // right key
+      //       camera.position.x += moveSpeed;
+      //       break;
+        case 87: //w key
+            camera.position.z -= moveSpeed;
+            break;
+        case 83: // s key
+            camera.position.z += moveSpeed;
+            break;
+        case 65: // a key
+            camera.position.x -= moveSpeed;
+            break;
+      case 68: // d key
+            camera.position.x += moveSpeed;
+            break;
+      case 16: //shift
+            camera.position.y -= moveSpeed / 2;
+            break;
+      case 17: //shift
+            camera.position.y += moveSpeed / 2;
+            break;
+    }
+  }
+})
+//camera
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/ window.innerHeight, .1, 1000);
+camera.position.z = 45;
+camera.position.y = 20;
+camera.position.x = 3;
 
+//orbital controls
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target = new THREE.Vector3(0, 0 , -40);
+controls.update();
 
 
 function animate() {
+  // controls.update();
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
   for (let i = 0; i < global_array.length; i++) {
     global_array[i].quaternion.copy(camera.quaternion);
   }
   }
-
 animate()
