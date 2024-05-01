@@ -121,6 +121,8 @@ export function area_builds(xpos = 0 , zpos = 0, ypos = 1 ){
   area_buildings.position.set(xpos, ypos, zpos);
   scene.add(area_buildings);
 }
+
+//test circles for arrows
 function test_circ(xpos = 0 , zpos = 0, ypos = 20 ){
   const geom = new THREE.DodecahedronGeometry(40 ,0);
   const mat = new THREE.MeshBasicMaterial( { color: 0xFF6347, wireframe: true } );
@@ -185,17 +187,17 @@ document.addEventListener("keydown", function(event){
   if (useCustomControls){
     switch(event.keyCode){
       // case 30: //up key
-      //       camera.position.z -= moveSpeed;
+      //       camera.rotation.z -= moveSpeed;
       //       break;
       //   case 40: // down key
       //       camera.position.z += moveSpeed;
       //       break;
-      //   case 37: // left key
-      //       camera.position.x -= moveSpeed;
-      //       break;
-      //   case 39: // right key
-      //       camera.position.x += moveSpeed;
-      //       break;
+        case 37: // left key
+            camera.rotation.x -= moveSpeed;
+            break;
+        case 39: // right key
+            camera.rotation.x += moveSpeed;
+            break;
         case 87: //w key
             camera.position.z -= moveSpeed;
             break;
@@ -217,6 +219,7 @@ document.addEventListener("keydown", function(event){
     }
   }
 })
+
 //camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth/ window.innerHeight, .1, 1000);
 camera.position.z = 45;
@@ -238,3 +241,4 @@ function animate() {
   }
   }
 animate()
+
